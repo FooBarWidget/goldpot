@@ -1,4 +1,6 @@
 Goldpot::Application.routes.draw do
+  resources :spendings
+  resources :earnings
   resources :periods do
     resources :spendings
     resources :earnings

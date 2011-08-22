@@ -23,7 +23,9 @@ textarea {
 	@include BorderRadius(4px);
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
 	font-size: 0.85em;
 	padding: 6px 12px 6px 12px;
 }
@@ -34,3 +36,28 @@ form {
 		margin-bottom: 0.5em;
 	}
 }
+
+#error_explanation {
+	background: #f9aaaa;
+	border: solid 1px #f37979;
+	padding: 12px;
+	font-size: 80%;
+	margin-left: 18px;
+	margin-right: 18px;
+	@include BorderRadius(3px);
+	@include BoxShadow(0px 0px 1px black);
+	
+	h2 {
+		font-size: 120%;
+		margin: 0 0 0.5em 0;
+	}
+	
+	ul {
+		margin: 0.5em 0 0 1em;
+	}
+	
+	ul, li {
+		font-size: inherit;
+	}
+}
+

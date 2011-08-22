@@ -1,4 +1,4 @@
-<%= form_for([@period, @spending], :html => { :class => 'spending' }) do |f| %>
+<%= form_for(@spending, :html => { :class => 'spending' }) do |f| %>
   <% if @spending.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@spending.errors.count, "error") %> prohibited this spending from being saved:</h2>
@@ -11,7 +11,7 @@
     </div>
   <% end %>
   
-  <div class="field">
+  <div class="first field">
     <div class="label">
       <%= f.label :date, 'Datum van uitgave' %>
     </div>
@@ -25,7 +25,7 @@
       <%= f.label :amount_ex_vat, 'Bedrag (ex BTW)' %>
     </div>
     <div class="input">
-      <%= f.number_field :amount_ex_vat, :class => 'money' %>
+      <%= f.text_field :amount_ex_vat, :class => 'money' %>
     </div>
   </div>
   
@@ -34,7 +34,7 @@
       <%= f.label :vat, 'BTW' %>
     </div>
     <div class="input">
-      <%= f.number_field :vat, :class => 'money' %>
+      <%= f.text_field :vat, :class => 'money' %>
     </div>
   </div>
   
@@ -82,7 +82,7 @@
   
   <div class="field">
     <div class="label">
-      <%= f.label :vendor_country, 'Land van vestiging van de verkoper' %>
+      <%= f.label :vendor_country, "Verkoper's land van vestiging" %>
     </div>
     <div class="input">
       <%= f.text_field :vendor_country, :class => 'combobox',
@@ -100,6 +100,14 @@
   </div>
   
   <div class="actions">
-    <%= f.submit 'Opslaan & registreer nog een uitgave' %>
+    <% if @spending.new_record? %>
+      <%= f.submit 'Opslaan & registreer nog een uitgave' %>
+    <% else %>
+      <%= f.submit 'Opslaan' %>
+      <input type="reset" value="Reset naar originele waarden">
+    <% end %>
+    <% if request.xhr? %>
+      <input type="button" value="Annuleren" class="cancel">
+    <% end %>
   </div>
 <% end %>

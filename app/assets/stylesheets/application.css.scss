@@ -148,64 +148,40 @@ p {
 	}
 } // #sections_bar
 
+.data_container {
+	margin: 1em 2px;
+	@include BoxShadow(1px 1px 3px #555555);
+}
 
-.users.list {
-	.user:first-child {
-		margin-top: 0;
+table.data {
+	width: 100%;
+	
+	td, th {
+		border-collapse: collapse;
+		border: solid 1px #bbbbbb;
+		font-size: 90%;
+		padding: 0px 4px;
 	}
 	
-	.user {
-		min-height: 58px;
-		margin-top: 16px;
-		
-		.avatar {
-			float: left;
-			margin-left: 0;
-			line-height: 0;
-		}
-		
-		.avatar img {
-			margin: 0;
-		}
-		
-		> div {
-			margin-left: 74px;
-		}
-		
-		.email {
-			font-size: 140%;
-			line-height: 1.5em;
-		}
-		
-		.actions a {
-			font-size: 85%;
-			margin-right: 0.7em;
-		}
+	th {
+		font-size: 80%;
+		font-weight: bold;
+		background: #dddddd;
 	}
-} // .users.list
+}
 
 
-#error_explanation {
-	background: #f9aaaa;
-	border: solid 1px #f37979;
-	padding: 12px;
-	font-size: 80%;
-	margin-left: 18px;
-	margin-right: 18px;
-	@include BorderRadius(3px);
-	@include BoxShadow(0px 0px 1px black);
-	
-	h2 {
-		font-size: 120%;
-		margin: 0 0 0.5em 0;
+table.spendings {
+	.drawer > td > .shell {
+		padding: 18px;
+		
+		.field.first {
+			margin-top: 0;
+		}
 	}
 	
-	ul {
-		margin: 0.5em 0 0 1em;
-	}
-	
-	ul, li {
-		font-size: inherit;
+	.drawer .cancel {
+		margin-left: 1.5em;
 	}
 }
 

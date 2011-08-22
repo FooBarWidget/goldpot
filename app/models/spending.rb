@@ -5,11 +5,12 @@ class Spending < Transaction
     "Eten en drinken"  => { :vat => 6_00, :opvoerbaar => 73_50 },
     "Serverhuur"       => { :vat => 19_00, :opvoerbaar => 100_00 },
     "Juridisch"        => { :vat => 19_00, :opvoerbaar => 100_00 },
-    "Merken, logo's en representatie" => { :vat => 6_00, :opvoerbaar => 100_00 },
+    "Merken, logo's en representatie" => { :vat => 19_00, :opvoerbaar => 100_00 },
     "Uitbesteed ontwikkeling" => { :vat => 19_00, :opvoerbaar => 100_00 },
   }
   KINDS_AS_JSON = KINDS.to_json
   
+  default_value_for(:date) { Date.today }
   default_value_for :spending_kind, "Overig"
   default_value_for :opvoerbaarheid_pct, 100
   default_value_for :vendor_country, "Nederland"

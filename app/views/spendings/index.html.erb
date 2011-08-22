@@ -1,7 +1,11 @@
 <h1>Listing spendings</h1>
 
-<table>
+<%= link_to 'Registreer een uitgave', new_spending_path %>
+
+<div class="data_container">
+<table class="data spendings">
   <tr>
+    <th>#</th>
     <th>Datum</th>
     <th>Bedrag (inc BTW)</th>
     <th>Bedrag (ex BTW)</th>
@@ -12,18 +16,22 @@
   </tr>
 
 <% @spendings.each do |spending| %>
-  <tr>
+  <%= content_tag_for(:tr, spending) do %>
+    <td><%= spending.id %></td>
     <td><%= spending.date %></td>
     <td><%= spending.amount_inc_vat %></td>
     <td><%= spending.amount_ex_vat %></td>
+    <td><%= spending.vat %></td>
+    <td><%= spending.money_account.name %></td>
+    <td><%= spending.comments %></td>
     <td>
-      <%= link_to 'Edit', edit_spending_path(spending) %>
-      <%= link_to 'Destroy', spending, confirm: 'Are you sure?', method: :delete %>
+      <%= link_to 'Edit', edit_spending_path(spending), :class => 'edit' %>
+      <span class="editing" style="display: none">Editing...</span>
+      <%= link_to 'Delete', spending, :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %>
     </td>
-  </tr>
+  <% end %>
 <% end %>
 </table>
+</div>
 
-<br />
-
-<%= link_to 'New Spending', new_spending_path %>
+<%= link_to 'Registreer een uitgave', new_spending_path %>

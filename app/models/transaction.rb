@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
   has_many :financial_statement_links, :inverse_of => :transaction
+  belongs_to :money_account
   
   def amount_ex_vat
     if amount_ex_vat_in_cents
@@ -30,6 +31,14 @@ class Transaction < ActiveRecord::Base
       self.vat_in_cents = (value.to_f * 100).to_i
     else
       self.vat_in_cents = nil
+    end
+  end
+  
+  def amount_inc_vat
+    if amount_ex_vat_in_cents
+      (amount_ex_vat_in_cents - (vat_in_cents || 0)) / 100.0
+    else
+      nil
     end
   end
 end

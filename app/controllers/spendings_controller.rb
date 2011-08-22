@@ -1,10 +1,12 @@
 class SpendingsController < ApplicationController
-  before_filter :fetch_period
+  before_filter :fetch_period, :only => :index
   
-  # GET /spendings
-  # GET /spendings.json
   def index
-    @spendings = @period.spendings
+    if @period
+      @spendings = @period.spendings
+    else
+      @spendings = Spending.all(:order => :date)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,8 +14,6 @@ class SpendingsController < ApplicationController
     end
   end
 
-  # GET /spendings/1
-  # GET /spendings/1.json
   def show
     @spending = Spending.find(params[:id])
 
@@ -23,8 +23,6 @@ class SpendingsController < ApplicationController
     end
   end
 
-  # GET /spendings/new
-  # GET /spendings/new.json
   def new
     @spending = Spending.new
 
@@ -36,11 +34,7 @@ class SpendingsController < ApplicationController
 
   # GET /spendings/1/edit
   def edit
-    @spending = @period.spendings.find(params[:id])
-  end
-
-  def link_to(*args)
-    render_to_string(:inline => '<%= link_to(*args) %>', :locals => { :args => args })
+    @spending = Spending.find(params[:id])
   end
 
   # POST /spendings
@@ -51,9 +45,9 @@ class SpendingsController < ApplicationController
     respond_to do |format|
       if @spending.save
         format.html do
-          link = link_to "Uitgave #{@spending.id}", [@period, @spending]
-          redirect_to new_period_spending_path(@period),
-            :notice => "#{link} succesvol opgeslagen!".html_safe
+          link = link_to "Uitgave #{@spending.id}", @spending
+          notice = "#{link} succesvol opgeslagen!".html_safe
+          redirect_to new_spending_path, :notice => notice
         end
         format.json { render :json => @spending, :status => :created, :location => @spending }
       else
@@ -66,11 +60,15 @@ class SpendingsController < ApplicationController
   # PUT /spendings/1
   # PUT /spendings/1.json
   def update
-    @spending = @period.spendings.find(params[:id])
+    @spending = Spending.find(params[:id])
 
     respond_to do |format|
       if @spending.update_attributes(params[:spending])
-        format.html { redirect_to [@period, @spending], :notice => 'Spending was successfully updated.' }
+        format.html do
+          link = link_to "Uitgave #{@spending.id}", @spending
+          notice = "#{link} aangepast!".html_safe
+          redirect_to spendings_url, :notice => notice
+        end
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
@@ -82,17 +80,17 @@ class SpendingsController < ApplicationController
   # DELETE /spendings/1
   # DELETE /spendings/1.json
   def destroy
-    @spending = @period.spendings.find(params[:id])
+    @spending = Spending.find(params[:id])
     @spending.destroy
 
     respond_to do |format|
-      format.html { redirect_to period_spendings_url(@period) }
+      format.html { redirect_to spendings_url }
       format.json { head :ok }
     end
   end
 
 private
   def fetch_period
-    @period = Period.parse(params[:period_id])
+    @period = Period.parse(params[:period_id]) if params[:period_id]
   end
 end
