@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
   <meta charset="utf-8">
 
-  <title><% if @title %><%= @title %> - <% end %>Juvia</title>
+  <title><% if @title %><%= @title %> - <% end %>Goldpot</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
@@ -52,6 +52,13 @@
       <div><%= link_to 'Home', '/' %></div>
     </nav>
   </div>
+  <% if flash[:notice] %>
+    <div class="row notice">
+      <div class="pre_2 col_8 suf_2 omega">
+        <span><%= flash[:notice] %></span>
+      </div>
+    </div>
+  <% end %>
 </header>
 
 <div id="container">

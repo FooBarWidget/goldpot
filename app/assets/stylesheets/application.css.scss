@@ -1,6 +1,8 @@
 // -*- Mode: SCSS; tab-width: 4; indent-tabs-mode: true; c-basic-offset: 4 -*-
 
 @import "css3_utils";
+@import "nice_forms";
+@import "combobox";
 
 html {
 	background: rgb(127,151,171);
@@ -29,6 +31,25 @@ header {
 		
 		div {
 			display: inline-block;
+		}
+	}
+	
+	.notice {
+		text-align: center;
+		margin-top: 3px;
+		
+		span {
+			background: #ffe666;
+			//border: solid 1px #ffc566;
+			font-size: 80%;
+			font-weight: bold;
+			padding: 4px 10px 4px 10px;
+			@include BorderRadius(8px);
+			@include BoxShadow(0px 0px 4px #888888);
+		}
+		
+		a {
+			text-decoration: underline;
 		}
 	}
 } // header

@@ -15,7 +15,7 @@ class SpendingsController < ApplicationController
   # GET /spendings/1
   # GET /spendings/1.json
   def show
-    @spending = @period.spendings.find(params[:id])
+    @spending = Spending.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,6 +39,10 @@ class SpendingsController < ApplicationController
     @spending = @period.spendings.find(params[:id])
   end
 
+  def link_to(*args)
+    render_to_string(:inline => '<%= link_to(*args) %>', :locals => { :args => args })
+  end
+
   # POST /spendings
   # POST /spendings.json
   def create
@@ -46,7 +50,11 @@ class SpendingsController < ApplicationController
 
     respond_to do |format|
       if @spending.save
-        format.html { redirect_to [@period, @spending], :notice => 'Spending was successfully created.' }
+        format.html do
+          link = link_to "Uitgave #{@spending.id}", [@period, @spending]
+          redirect_to new_period_spending_path(@period),
+            :notice => "#{link} succesvol opgeslagen!".html_safe
+        end
         format.json { render :json => @spending, :status => :created, :location => @spending }
       else
         format.html { render :action => "new" }

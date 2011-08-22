@@ -16,7 +16,7 @@
       <%= f.label :date, 'Datum van uitgave' %>
     </div>
     <div class="input">
-      <%= f.number_field :date %>
+      <%= f.text_field :date %>
     </div>
   </div>
   
@@ -49,37 +49,10 @@
   
   <div class="field">
     <div class="label">
-      <%= f.label :comments, 'Commentaar' %>
-    </div>
-    <div class="input">
-      <%= f.text_area :comments %>
-    </div>
-  </div>
-  
-  <div class="field">
-    <div class="label">
       <%= f.label :spending_kind, 'Soort uitgave' %>
     </div>
     <div class="input">
       <%= f.text_field :spending_kind %>
-    </div>
-  </div>
-  
-  <div class="field">
-    <div class="label">
-      <%= f.label :vendor_country, 'Land van vestiging van de verkoper' %>
-    </div>
-    <div class="input">
-      <%= f.text_field :vendor_country %>
-    </div>
-  </div>
-  
-  <div class="field">
-    <div class="label">
-      <%= f.label :vendor_vat_number, 'Europese BTW-nummer van de verkoper' %>
-    </div>
-    <div class="input">
-      <%= f.text_field :vendor_vat_number %> [Controleer knop hier]
     </div>
   </div>
   
@@ -96,8 +69,36 @@
     <%= f.check_box :depreciable %>
     <%= f.label :depreciable, 'Met deze uitgave is een ding gekocht wat afgeschreven moet worden' %>
   </div>
-
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :comments, 'Commentaar' %>
+    </div>
+    <div class="input">
+      <%= f.text_area :comments, :cols => nil, :rows => nil %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :vendor_country, 'Land van vestiging van de verkoper' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :vendor_country, :class => 'combobox',
+        :'data-combobox-values' => ['Nederland', 'Duitsland', 'Rusland', 'Verenigde Staten'].to_json %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :vendor_vat_number, 'Europese BTW-nummer van de verkoper' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :vendor_vat_number %> [Controleer knop hier]
+    </div>
+  </div>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Opslaan & registreer nog een uitgave' %>
   </div>
 <% end %>
