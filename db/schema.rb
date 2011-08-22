@@ -20,14 +20,23 @@ ActiveRecord::Schema.define(:version => 20110822122970) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "money_accounts", :force => true do |t|
+  create_table "partners", :force => true do |t|
     t.string   "name",       :null => false
-    t.integer  "owner_id",   :null => false
     t.text     "comments"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.index ["name"], :name => "index_partners_on_name", :unique => true
+  end
+
+  create_table "money_accounts", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "owner_id"
+    t.text     "comments"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.index ["owner_id", "name"], :name => "index_money_accounts_on_owner_id_and_name", :unique => true
     t.index ["owner_id"], :name => "index_money_accounts_on_owner_id"
-    t.foreign_key ["owner_id"], "partner", ["id"], :on_update => :cascade, :on_delete => :cascade
+    t.foreign_key ["owner_id"], "partners", ["id"], :on_update => :cascade, :on_delete => :cascade
   end
 
   create_table "transactions", :force => true do |t|
@@ -60,13 +69,6 @@ ActiveRecord::Schema.define(:version => 20110822122970) do
     t.index ["financial_statement_id"], :name => "index_financial_statement_links_on_financial_statement_id"
     t.foreign_key ["financial_statement_id"], "financial_statements", ["id"], :on_update => :cascade, :on_delete => :cascade
     t.foreign_key ["transaction_id"], "transactions", ["id"], :on_update => :cascade, :on_delete => :cascade
-  end
-
-  create_table "partners", :force => true do |t|
-    t.string   "name",       :null => false
-    t.text     "comments"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
 end

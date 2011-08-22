@@ -6,9 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+hongli = Partner.create!(:name => 'Hongli Lai')
+ninh   = Partner.create!(:name => 'Ninh Bui')
+
 MoneyAccount.create!(:name => "Phusion bankaccount")
 MoneyAccount.create!(:name => "Phusion credit card")
 MoneyAccount.create!(:name => "Phusion Paypal")
-MoneyAccount.create!(:name => "Hongli's privefondsen")
-MoneyAccount.create!(:name => "Ninh's privefondsen")
+hongli.money_accounts.create!(:name => "Hongli's privegeld")
+ninh.money_accounts.create!(:name => "Ninh's privegeld")
 
