@@ -80,6 +80,7 @@
         
         setValue : function (value) {
             this.textInputElement.val(value);
+            this.textInputElement.change();
         },
 
         getValue : function () {
