@@ -3,10 +3,14 @@ class CreateTransactions < ActiveRecord::Migration
     create_table :transactions do |t|
       t.string     :type, :null => false
       t.timestamps :null => false
+      t.date       :date
       t.integer    :amount_ex_vat
       t.integer    :vat
-      t.integer    :style
       t.text       :comments
+      t.integer    :color, :null => false, :default => 0
+      t.integer    :background_color, :null => false, :default => 0
+      t.boolean    :bold, :null => false, :default => false
+      t.boolean    :italic, :null => false, :default => false
       
       
       ### Fields for which the meaning depends on the type

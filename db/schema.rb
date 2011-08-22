@@ -40,19 +40,24 @@ ActiveRecord::Schema.define(:version => 20110822122970) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.string   "type",               :null => false
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.string   "type",                                  :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.date     "date"
     t.integer  "amount_ex_vat"
     t.integer  "vat"
-    t.integer  "style"
     t.text     "comments"
-    t.integer  "kind"
+    t.integer  "color",              :default => 0,     :null => false
+    t.integer  "background_color",   :default => 0,     :null => false
+    t.boolean  "bold",               :default => false, :null => false
+    t.boolean  "italic",             :default => false, :null => false
     t.integer  "money_account_id"
+    t.string   "spending_kind"
     t.integer  "vendor_country"
     t.integer  "vendor_vat_number"
     t.integer  "opvoerbaarheid_ppm"
     t.boolean  "depreciable"
+    t.integer  "earning_kind"
     t.integer  "buyer_country"
     t.integer  "buyer_kind"
     t.index ["money_account_id"], :name => "index_transactions_on_money_account_id"

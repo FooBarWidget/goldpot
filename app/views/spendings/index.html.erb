@@ -1,0 +1,21 @@
+<h1>Listing spendings</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @spendings.each do |spending| %>
+  <tr>
+    <td><%= link_to 'Show', spending %></td>
+    <td><%= link_to 'Edit', edit_spending_path(spending) %></td>
+    <td><%= link_to 'Destroy', spending, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Spending', new_spending_path %>

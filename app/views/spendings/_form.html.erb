@@ -1,0 +1,103 @@
+<%= form_for([@period, @spending]) do |f| %>
+  <% if @spending.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spending.errors.count, "error") %> prohibited this spending from being saved:</h2>
+
+      <ul>
+      <% @spending.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :date, 'Datum van uitgave' %>
+    </div>
+    <div class="input">
+      <%= f.number_field :date %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :amount_ex_vat, 'Bedrag (ex BTW)' %>
+    </div>
+    <div class="input">
+      <%= f.number_field :amount_ex_vat %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :vat, 'BTW' %>
+    </div>
+    <div class="input">
+      <%= f.number_field :vat %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :money_account_id, 'Uit welke geldbron is betaald?' %>
+    </div>
+    <div class="input">
+      <%= collection_select(:spending, :money_account_id, MoneyAccount.all, :id, :name) %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :comments, 'Commentaar' %>
+    </div>
+    <div class="input">
+      <%= f.text_area :comments %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :spending_kind, 'Soort uitgave' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :spending_kind %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :vendor_country, 'Land van vestiging van de verkoper' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :vendor_country %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :vendor_vat_number, 'Europese BTW-nummer van de verkoper' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :vendor_vat_number %> [Controleer knop hier]
+    </div>
+  </div>
+  
+  <div class="field">
+    <div class="label">
+      <%= f.label :opvoerbaarheid_pct, 'Opvoerbaar voor' %>
+    </div>
+    <div class="input">
+      <%= f.text_field :opvoerbaarheid_pct %>%
+    </div>
+  </div>
+  
+  <div class="field">
+    <%= f.check_box :depreciable %>
+    <%= f.label :depreciable, 'Met deze uitgave is een ding gekocht wat afgeschreven moet worden' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
