@@ -1,4 +1,4 @@
-<%= form_for([@period, @spending]) do |f| %>
+<%= form_for([@period, @spending], :html => { :class => 'spending' }) do |f| %>
   <% if @spending.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@spending.errors.count, "error") %> prohibited this spending from being saved:</h2>
@@ -25,7 +25,7 @@
       <%= f.label :amount_ex_vat, 'Bedrag (ex BTW)' %>
     </div>
     <div class="input">
-      <%= f.number_field :amount_ex_vat %>
+      <%= f.number_field :amount_ex_vat, :class => 'money' %>
     </div>
   </div>
   
@@ -34,7 +34,7 @@
       <%= f.label :vat, 'BTW' %>
     </div>
     <div class="input">
-      <%= f.number_field :vat %>
+      <%= f.number_field :vat, :class => 'money' %>
     </div>
   </div>
   
@@ -52,7 +52,8 @@
       <%= f.label :spending_kind, 'Soort uitgave' %>
     </div>
     <div class="input">
-      <%= f.text_field :spending_kind %>
+      <%= f.text_field :spending_kind, :class => 'combobox',
+        :'data-combobox-values' => Spending::KINDS.keys.to_json %>
     </div>
   </div>
   
@@ -61,7 +62,7 @@
       <%= f.label :opvoerbaarheid_pct, 'Opvoerbaar voor' %>
     </div>
     <div class="input">
-      <%= f.text_field :opvoerbaarheid_pct %>%
+      <%= f.text_field :opvoerbaarheid_pct, :class => 'percentage' %>%
     </div>
   </div>
   

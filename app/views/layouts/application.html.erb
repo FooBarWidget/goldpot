@@ -35,6 +35,9 @@
   
   <!-- Customizations here --> 
   <%= stylesheet_link_tag 'application' %>
+  <script>
+    window.spendingKinds = <%= Spending::KINDS_AS_JSON.html_safe %>;
+  </script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
   

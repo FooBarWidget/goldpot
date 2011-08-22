@@ -4,8 +4,8 @@ class CreateTransactions < ActiveRecord::Migration
       t.string     :type, :null => false
       t.timestamps :null => false
       t.date       :date
-      t.integer    :amount_ex_vat
-      t.integer    :vat
+      t.integer    :amount_ex_vat_in_cents
+      t.integer    :vat_in_cents
       t.text       :comments
       t.integer    :color, :null => false, :default => 0
       t.integer    :background_color, :null => false, :default => 0
@@ -15,7 +15,9 @@ class CreateTransactions < ActiveRecord::Migration
       
       ### Fields for which the meaning depends on the type
       
-      # Spendings: the money account that financed this spending.
+      # Spendings: the money account that financed this spending. Can be null,
+      #            meaning unknown, in which case the costs should be split among
+      #            all partners.
       # Earnings : the money account that this earning was put into.
       t.integer    :money_account_id, :on_update => :cascade, :on_delete => :no_action
       
