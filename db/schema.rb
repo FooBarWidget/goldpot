@@ -20,20 +20,34 @@ ActiveRecord::Schema.define(:version => 20110822122970) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "money_accounts", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "owner_id",   :null => false
+    t.text     "comments"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.index ["owner_id"], :name => "index_money_accounts_on_owner_id"
+    t.foreign_key ["owner_id"], "partner", ["id"], :on_update => :cascade, :on_delete => :cascade
+  end
+
   create_table "transactions", :force => true do |t|
-    t.string   "type",                             :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.integer  "amount_ex_vat",                    :null => false
-    t.integer  "vat",               :default => 0, :null => false
+    t.string   "type",               :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "amount_ex_vat"
+    t.integer  "vat"
+    t.integer  "style"
     t.text     "comments"
     t.integer  "kind"
+    t.integer  "money_account_id"
     t.integer  "vendor_country"
     t.integer  "vendor_vat_number"
-    t.boolean  "opvoerbaar"
+    t.integer  "opvoerbaarheid_ppm"
     t.boolean  "depreciable"
     t.integer  "buyer_country"
     t.integer  "buyer_kind"
+    t.index ["money_account_id"], :name => "index_transactions_on_money_account_id"
+    t.foreign_key ["money_account_id"], "money_accounts", ["id"], :on_update => :cascade, :on_delete => :no_action
   end
 
   create_table "financial_statement_links", :force => true do |t|
@@ -46,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20110822122970) do
     t.index ["financial_statement_id"], :name => "index_financial_statement_links_on_financial_statement_id"
     t.foreign_key ["financial_statement_id"], "financial_statements", ["id"], :on_update => :cascade, :on_delete => :cascade
     t.foreign_key ["transaction_id"], "transactions", ["id"], :on_update => :cascade, :on_delete => :cascade
+  end
+
+  create_table "partners", :force => true do |t|
+    t.string   "name",       :null => false
+    t.text     "comments"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
