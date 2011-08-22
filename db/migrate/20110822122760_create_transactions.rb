@@ -11,8 +11,6 @@ class CreateTransactions < ActiveRecord::Migration
       
       ### Fields for which the meaning depends on the type
       
-      t.integer    :kind
-      
       # Spendings: the money account that financed this spending.
       # Earnings : the money account that this earning was put into.
       t.integer    :money_account_id, :on_update => :cascade, :on_delete => :no_action
@@ -20,6 +18,7 @@ class CreateTransactions < ActiveRecord::Migration
       
       ### Spending-specific fields
       
+      t.string     :spending_kind
       t.integer    :vendor_country
       t.integer    :vendor_vat_number
       t.integer    :opvoerbaarheid_ppm
@@ -28,6 +27,7 @@ class CreateTransactions < ActiveRecord::Migration
       
       ### Earning-specific fields
       
+      t.integer    :earning_kind
       t.integer    :buyer_country
       t.integer    :buyer_kind
     end
