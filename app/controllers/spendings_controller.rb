@@ -65,9 +65,13 @@ class SpendingsController < ApplicationController
     respond_to do |format|
       if @spending.update_attributes(params[:spending])
         format.html do
-          link = link_to "Uitgave #{@spending.id}", @spending
-          notice = "#{link} aangepast!".html_safe
-          redirect_to spendings_url, :notice => notice
+          if request.xhr?
+            render :partial => @spending
+          else
+            link = link_to "Uitgave #{@spending.id}", @spending
+            notice = "#{link} aangepast!".html_safe
+            redirect_to spendings_url, :notice => notice
+          end
         end
         format.json { head :ok }
       else

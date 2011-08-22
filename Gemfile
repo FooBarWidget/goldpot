@@ -8,6 +8,7 @@ gem 'rails', '3.1.0.rc6'
 gem 'sqlite3'
 gem 'schema_plus'
 gem 'default_value_for'
+gem 'rails-i18n'
 
 # Gems used only for assets and not required
 # in production environments by default.

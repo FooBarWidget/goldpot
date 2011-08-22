@@ -14,23 +14,7 @@
     <th>Commentaar</th>
     <th></th>
   </tr>
-
-<% @spendings.each do |spending| %>
-  <%= content_tag_for(:tr, spending) do %>
-    <td><%= spending.id %></td>
-    <td><%= spending.date %></td>
-    <td><%= spending.amount_inc_vat %></td>
-    <td><%= spending.amount_ex_vat %></td>
-    <td><%= spending.vat %></td>
-    <td><%= spending.money_account.name %></td>
-    <td><%= spending.comments %></td>
-    <td>
-      <%= link_to 'Edit', edit_spending_path(spending), :class => 'edit' %>
-      <span class="editing" style="display: none">Editing...</span>
-      <%= link_to 'Delete', spending, :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %>
-    </td>
-  <% end %>
-<% end %>
+  <%= render :partial => @spendings %>
 </table>
 </div>
 
