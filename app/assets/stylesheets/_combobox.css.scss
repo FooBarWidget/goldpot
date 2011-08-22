@@ -33,6 +33,7 @@
     font-family: Helvetia, Arial, sans-serif;
     font-size: 12px;
     z-index: 1000;
+    @include BoxShadow(0px 6px 8px #444444);
 }
 
 .combobox_selector ul {
@@ -43,7 +44,10 @@
 }
 
 .combobox_selector li {
+    margin: 0;
     padding: 2px 5px;
+    font-size: inherit;
+    cursor: pointer;
 }
 
 .combobox_selector li:hover,
