@@ -1,7 +1,10 @@
 $.fn.autoFillValue = (value)->
   $this = $(this)
   if !$this.hasClass('changed')
-    $this.val(value)
+    if $this.attr('type') == 'checkbox'
+      $this.attr('checked', !!value)
+    else
+      $this.val(value)
     $this.removeClass('changed')
 
 installChangeMarks = ->
@@ -49,6 +52,7 @@ installAutoFill = ->
       div = (1 + spendingKind.vat / 10000)
       autoFill('vat', (amountExVat - amountExVat / div).toFixed(2))
     autoFill('opvoerbaarheid_pct', spendingKind.opvoerbaar / 100)
+    autoFill('depreciable', spendingKind.depreciable)
 
 
 $(document).bind 'reinstall_behavior', ->
