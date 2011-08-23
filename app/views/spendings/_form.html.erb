@@ -1,4 +1,4 @@
-<%= form_for(@spending, :html => { :class => 'spending' }) do |f| %>
+<%= form_for(@spending, :url => create_or_update_spending_path(@spending), :html => { :class => 'spending' }) do |f| %>
   <% if @spending.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@spending.errors.count, "error") %> prohibited this spending from being saved:</h2>
@@ -22,7 +22,7 @@
   
   <div class="field">
     <div class="label">
-      <%= f.label :amount_ex_vat, 'Bedrag (ex BTW)' %>
+      <%= f.label :amount_ex_vat %>
     </div>
     <div class="input">
       <%= f.text_field :amount_ex_vat, :class => 'money' %>
@@ -31,7 +31,7 @@
   
   <div class="field">
     <div class="label">
-      <%= f.label :vat, 'BTW' %>
+      <%= f.label :vat %>
     </div>
     <div class="input">
       <%= f.text_field :vat, :class => 'money' %>
@@ -103,18 +103,18 @@
   
   <div class="actions">
     <% if @spending.new_record? %>
-      <%= f.submit 'Opslaan & registreer nog een uitgave', :class => 'primary button' %>
+      <%= f.submit 'Opslaan & registreer nog een uitgave' %>
     <% else %>
-      <%= f.submit 'Opslaan', :class => 'primary button icon edit' %>
+      <%= f.submit 'Opslaan' %>
     <% end %>
     
     <% if !@spending.new_record? || request.xhr? %>
       <div class="group">
         <% if !@spending.new_record? %>
-          <input type="reset" value="Reset naar originele waarden" class="button">
+          <input type="reset" value="Reset naar originele waarden">
         <% end %>
         <% if request.xhr? %>
-          <input type="button" value="Annuleren" class="cancel button">
+          <input type="button" value="Annuleren" class="cancel">
         <% end %>
       </div>
     <% end %>

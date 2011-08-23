@@ -24,6 +24,23 @@ $(document).bind 'reinstall_behavior', ->
           $(this).show()
           $(this).parent().find('.editing').hide()
       
+      onSubmit = (event)=>
+        event.preventDefault()
+        if event.target.nodeName == 'FORM'
+          form = $(event.target)
+        else
+          form = $(event.target).closest('form')
+        $.post form.attr('action'), form.serialize(), (response)=>
+        if response.indexOf('error_explanation') == -1
+          stopEditing()
+          $(response).insertAfter(row)
+          row.remove()
+          $(document).trigger('reinstall_behavior')
+        else
+          setContents(response)
+          div.show()
+          div.find('#error_explanation')[0].scrollIntoView()
+      
       setContents = (html)=>
         div = newRow.find('> td > .shell')
         div.hide()

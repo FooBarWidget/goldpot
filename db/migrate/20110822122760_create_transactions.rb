@@ -2,7 +2,9 @@ class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
       t.string     :type, :null => false
+      t.integer    :folder_id, :null => false, :on_update => :cascade, :on_delete => :cascade
       t.timestamps :null => false
+      
       t.date       :date
       t.integer    :amount_ex_vat_in_cents
       t.integer    :vat_in_cents

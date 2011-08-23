@@ -1,6 +1,11 @@
 Goldpot::Application.routes.draw do
-  resources :spendings
-  resources :earnings
+  root :to => 'folders#index'
+  
+  resources :folders do
+    resources :spendings
+    resources :earnings
+  end
+  
   resources :periods do
     resources :spendings
     resources :earnings

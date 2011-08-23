@@ -8,7 +8,8 @@ $.fn.autoFillValue = (value)->
     $this.removeClass('changed')
 
 installChangeMarks = ->
-  elements = $('input:not(.change-marks-installed), textarea:not(.change-marks-installed)')
+  elements = $('input:not(.change-marks-installed), textarea:not(.change-marks-installed)').
+    filter(':not([type="submit"]):not([type="reset"]):not([type="hidden"]):not([type="button"])')
   elements.addClass('change-marks-installed')
   elements.change ->
     $(this).addClass('changed')
@@ -21,7 +22,8 @@ installComboboxes = ->
     $(this).combobox(values)
 
 installAutoFill = ->  
-  elements = $('form.spending input:not(.auto-fill-installed), form.spending textarea:not(.auto-fill-installed)')
+  elements = $('form.spending input:not(.auto-fill-installed), form.spending textarea:not(.auto-fill-installed)').
+    filter(':not([type="submit"]):not([type="reset"]):not([type="hidden"]):not([type="button"])')
   elements.addClass('auto-fill-installed')
   elements.change ->
     form = $(this).closest('form')

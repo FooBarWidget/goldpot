@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
-  has_many :financial_statement_links, :inverse_of => :transaction
-  belongs_to :money_account
+  belongs_to :folder, :inverse_of => :transactions
+  belongs_to :money_account, :inverse_of => :transactions
   
   def amount_ex_vat
     if amount_ex_vat_in_cents

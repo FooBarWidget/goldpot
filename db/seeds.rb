@@ -15,3 +15,4 @@ MoneyAccount.create!(:name => "Phusion Paypal")
 hongli.money_accounts.create!(:name => "Hongli's privegeld")
 ninh.money_accounts.create!(:name => "Ninh's privegeld")
 
+Folder.create!(:name => 'Financieel Q3-2011')

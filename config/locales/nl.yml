@@ -1,0 +1,15 @@
+nl:
+  activerecord:
+    models:
+      folder: Map
+      spending: Uitgave
+      earning: Inkomen
+    attributes:
+      folder:
+        name: Naam
+        comments: Commentaar
+      spending:
+        date: Datum
+        amount_ex_vat: 'Bedrag (ex BTW)'
+        vat: BTW
+        spending_kind: Soort

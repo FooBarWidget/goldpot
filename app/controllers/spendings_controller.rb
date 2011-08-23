@@ -1,12 +1,11 @@
 class SpendingsController < ApplicationController
-  before_filter :fetch_period, :only => :index
+  helper_method :new_spending_path, :edit_spending_path, :create_or_update_spending_path,
+    :spending_path, :spendings_path
+  
+  before_filter :fetch_folder
   
   def index
-    if @period
-      @spendings = @period.spendings
-    else
-      @spendings = Spending.all(:order => :date)
-    end
+    @spendings = @folder.spendings
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +14,7 @@ class SpendingsController < ApplicationController
   end
 
   def show
-    @spending = Spending.find(params[:id])
+    @spending = @folder.spendings.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +23,7 @@ class SpendingsController < ApplicationController
   end
 
   def new
-    @spending = Spending.new
+    @spending = @folder.spendings.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,22 +33,22 @@ class SpendingsController < ApplicationController
 
   # GET /spendings/1/edit
   def edit
-    @spending = Spending.find(params[:id])
+    @spending = @folder.spendings.find(params[:id])
   end
-
+  
   # POST /spendings
   # POST /spendings.json
   def create
-    @spending = Spending.new(params[:spending])
+    @spending = @folder.spendings.build(params[:spending])
 
     respond_to do |format|
       if @spending.save
         format.html do
-          link = link_to "Uitgave #{@spending.id}", @spending
+          link = link_to "Uitgave #{@spending.id}", spending_path(@spending)
           notice = "#{link} succesvol opgeslagen!".html_safe
           redirect_to new_spending_path, :notice => notice
         end
-        format.json { render :json => @spending, :status => :created, :location => @spending }
+        format.json { render :json => @spending, :status => :created, :location => spending_path(@spending) }
       else
         format.html { render :action => "new" }
         format.json { render :json => @spending.errors, :status => :unprocessable_entity }
@@ -60,7 +59,7 @@ class SpendingsController < ApplicationController
   # PUT /spendings/1
   # PUT /spendings/1.json
   def update
-    @spending = Spending.find(params[:id])
+    @spending = @folder.spendings.find(params[:id])
 
     respond_to do |format|
       if @spending.update_attributes(params[:spending])
@@ -68,9 +67,9 @@ class SpendingsController < ApplicationController
           if request.xhr?
             render :partial => @spending
           else
-            link = link_to "Uitgave #{@spending.id}", @spending
+            link = link_to "Uitgave #{@spending.id}", spending_path(@spending)
             notice = "#{link} aangepast!".html_safe
-            redirect_to spendings_url, :notice => notice
+            redirect_to spendings_path, :notice => notice
           end
         end
         format.json { head :ok }
@@ -84,17 +83,41 @@ class SpendingsController < ApplicationController
   # DELETE /spendings/1
   # DELETE /spendings/1.json
   def destroy
-    @spending = Spending.find(params[:id])
+    @spending = @folder.spendings.find(params[:id])
     @spending.destroy
 
     respond_to do |format|
-      format.html { redirect_to spendings_url }
+      format.html { redirect_to spendings_path }
       format.json { head :ok }
     end
   end
 
 private
-  def fetch_period
-    @period = Period.parse(params[:period_id]) if params[:period_id]
+  def fetch_folder
+    @folder = Folder.find(params[:folder_id])
+  end
+  
+  def new_spending_path
+    new_folder_spending_path(@folder)
+  end
+  
+  def edit_spending_path(spending)
+    edit_folder_spending_path(@folder, spending)
+  end
+  
+  def create_or_update_spending_path(spending)
+    if spending.new_record?
+      spendings_path
+    else
+      spending_path(spending)
+    end
+  end
+  
+  def spending_path(spending)
+    folder_spending_path(@folder, spending)
+  end
+  
+  def spendings_path
+    folder_spendings_path(@folder)
   end
 end
