@@ -5,16 +5,26 @@
 <div class="data_container">
 <table class="data spendings">
   <tr>
-    <th>#</th>
-    <th>Datum</th>
-    <th>Bedrag (inc BTW)</th>
-    <th>Bedrag (ex BTW)</th>
-    <th>BTW</th>
-    <th>Geldbron</th>
-    <th>Commentaar</th>
-    <th></th>
+    <th style="width: 0%">#</th>
+    <th style="width: 9%">Datum</th>
+    <th style="width: 0%"><span>Bedrag</span> <span>(inc BTW)</span></th>
+    <th style="width: 0%"><span>Bedrag</span> <span>(ex BTW)</span></th>
+    <th style="width: 0%">BTW</th>
+    <th style="width: 15%">Geldbron</th>
+    <th style="width: 66%">Commentaar</th>
+    <th style="width: 10%"></th>
   </tr>
   <%= render :partial => @spendings %>
+  <tr class="aggregate">
+    <td></td>
+    <td></td>
+    <td><%= "%.2f" % @aggregate.amount_inc_vat %></td>
+    <td><%= "%.2f" % @aggregate.amount_ex_vat %></td>
+    <td><%= "%.2f" % @aggregate.vat %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
 </div>
 

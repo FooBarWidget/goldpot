@@ -162,14 +162,42 @@ table.data {
 	td, th {
 		border-collapse: collapse;
 		border: solid 1px #bbbbbb;
-		font-size: 90%;
+		font-size: 80%;
 		padding: 0px 4px;
+		vertical-align: middle;
 	}
 	
 	th {
 		font-size: 80%;
 		font-weight: bold;
 		background: #dddddd;
+		line-height: 1.5em;
+		padding: 1px 6px;
+		
+		span {
+			white-space: nowrap;
+		}
+	}
+	
+	td.actions {
+		text-align: center;
+		
+		.button {
+			vertical-align: middle;
+			margin: 4px 0px;
+		}
+		
+		.button.icon::before {
+			margin: 0;
+		}
+		
+		.button-group {
+			vertical-align: middle;
+		}
+	}
+	
+	.aggregate td {
+		font-weight: bold;
 	}
 }
 

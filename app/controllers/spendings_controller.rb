@@ -6,6 +6,7 @@ class SpendingsController < ApplicationController
   
   def index
     @spendings = @folder.spendings
+    @aggregate = SpendingAggregate.new(@spendings)
 
     respond_to do |format|
       format.html # index.html.erb

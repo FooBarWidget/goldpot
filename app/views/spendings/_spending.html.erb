@@ -1,14 +1,22 @@
 <%= content_tag_for(:tr, spending) do %>
   <td><%= spending.id %></td>
   <td><%= spending.date %></td>
-  <td><%= spending.amount_inc_vat %></td>
-  <td><%= spending.amount_ex_vat %></td>
-  <td><%= spending.vat %></td>
+  <td><%= "%.2f" % spending.amount_inc_vat %></td>
+  <td><%= "%.2f" % spending.amount_ex_vat %></td>
+  <td><%= "%.2f" % spending.vat %></td>
   <td><%= spending.money_account.name %></td>
   <td><%= spending.comments %></td>
-  <td>
-    <%= link_to 'Edit', edit_spending_path(spending), :class => 'edit' %>
-    <span class="editing" style="display: none">Editing...</span>
-    <%= link_to 'Delete', spending, :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %>
+  <td class="actions">
+    <div class="button-group">
+    <%= link_to '', edit_spending_path(spending),
+      :class => 'button icon edit edit-button',
+      :title => 'Edit' %>
+    <span class="button icon edit editing disable editing-button" style="display: none"></span>
+    <%= link_to '', spending,
+      :confirm => 'Weet u zeker dat u deze rij wilt verwijderen?',
+      :method => :delete,
+      :class => 'button icon remove delete-button',
+      :title => 'Delete' %>
+    </div>
   </td>
 <% end %>

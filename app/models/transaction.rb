@@ -35,8 +35,16 @@ class Transaction < ActiveRecord::Base
   end
   
   def amount_inc_vat
+    if amount_inc_vat_in_cents
+      amount_inc_vat_in_cents / 100.0
+    else
+      nil
+    end
+  end
+  
+  def amount_inc_vat_in_cents
     if amount_ex_vat_in_cents
-      (amount_ex_vat_in_cents - (vat_in_cents || 0)) / 100.0
+      amount_ex_vat_in_cents - (vat_in_cents || 0)
     else
       nil
     end

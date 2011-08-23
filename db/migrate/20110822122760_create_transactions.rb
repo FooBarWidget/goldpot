@@ -27,7 +27,7 @@ class CreateTransactions < ActiveRecord::Migration
       ### Spending-specific fields
       
       t.string     :spending_kind
-      t.integer    :vendor_country
+      t.string     :vendor_country
       t.integer    :vendor_vat_number
       t.integer    :opvoerbaarheid_ppm
       t.boolean    :depreciable
@@ -36,7 +36,7 @@ class CreateTransactions < ActiveRecord::Migration
       ### Earning-specific fields
       
       t.integer    :earning_kind
-      t.integer    :buyer_country
+      t.string     :buyer_country
       t.integer    :buyer_kind
     end
   end

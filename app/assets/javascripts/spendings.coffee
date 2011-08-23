@@ -1,5 +1,5 @@
 $(document).bind 'reinstall_behavior', ->
-  elements = $('table.spendings .edit:not(.spendings-inline-editor-installed)')
+  elements = $('table.spendings .edit-button:not(.spendings-inline-editor-installed)')
   elements.addClass('spendings-inline-editor-installed')
   
   # Upon clicking 'Edit'...
@@ -8,7 +8,7 @@ $(document).bind 'reinstall_behavior', ->
     
     # ...hide the edit link and show 'editing...'
     $(this).hide()
-    $(this).parent().find('.editing').show()
+    $(this).parent().find('.editing-button').show()
     
     # ...load the editor panel into a row below
     $.get $(this).attr('href'), (html)=>
@@ -22,7 +22,7 @@ $(document).bind 'reinstall_behavior', ->
         div.slideUp =>
           newRow.remove()
           $(this).show()
-          $(this).parent().find('.editing').hide()
+          $(this).parent().find('.editing-button').hide()
       
       onSubmit = (event)=>
         event.preventDefault()
