@@ -41,6 +41,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
+    css3buttons (1.0.1)
+      actionpack (>= 3.0.0)
     default_value_for (1.0.5)
     diff-lcs (1.1.2)
     erubis (2.7.0)
@@ -131,6 +133,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.1.0.rc)
+  css3buttons
   default_value_for
   jquery-rails
   rails (= 3.1.0.rc6)

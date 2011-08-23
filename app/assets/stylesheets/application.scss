@@ -1,4 +1,7 @@
 // -*- Mode: SCSS; tab-width: 4; indent-tabs-mode: true; c-basic-offset: 4 -*-
+/*
+ * = require css3buttons/without-reset
+ */
 
 @import "css3_utils";
 @import "nice_forms";
@@ -178,10 +181,6 @@ table.spendings {
 		.field.first {
 			margin-top: 0;
 		}
-	}
-	
-	.drawer .cancel {
-		margin-left: 1.5em;
 	}
 }
 

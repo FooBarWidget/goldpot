@@ -35,6 +35,15 @@ form {
 		margin-top: 0.5em;
 		margin-bottom: 0.5em;
 	}
+	
+	.actions {
+		margin-top: 24px;
+		
+		.group {
+			display: inline-block;
+			margin-left: 30px;
+		}
+	}
 }
 
 #error_explanation {

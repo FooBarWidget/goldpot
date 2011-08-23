@@ -101,13 +101,20 @@
   
   <div class="actions">
     <% if @spending.new_record? %>
-      <%= f.submit 'Opslaan & registreer nog een uitgave' %>
+      <%= f.submit 'Opslaan & registreer nog een uitgave', :class => 'primary button' %>
     <% else %>
-      <%= f.submit 'Opslaan' %>
-      <input type="reset" value="Reset naar originele waarden">
+      <%= f.submit 'Opslaan', :class => 'primary button icon edit' %>
     <% end %>
-    <% if request.xhr? %>
-      <input type="button" value="Annuleren" class="cancel">
+    
+    <% if !@spending.new_record? || request.xhr? %>
+      <div class="group">
+        <% if !@spending.new_record? %>
+          <input type="reset" value="Reset naar originele waarden" class="button">
+        <% end %>
+        <% if request.xhr? %>
+          <input type="button" value="Annuleren" class="cancel button">
+        <% end %>
+      </div>
     <% end %>
   </div>
 <% end %>
