@@ -54,6 +54,7 @@
     <div class="input">
       <%= f.text_field :spending_kind, :class => 'combobox',
         :'data-combobox-values' => Spending::KINDS.keys.to_json %>
+      <a href="http://www.belastingdienst.nl/zakelijk/ondernemen_kosten/ondernemen_kosten-09.html">(!)</a>
     </div>
   </div>
   
@@ -95,7 +96,8 @@
       <%= f.label :vendor_vat_number, 'Europese BTW-nummer van de verkoper' %>
     </div>
     <div class="input">
-      <%= f.text_field :vendor_vat_number %> [Controleer knop hier]
+      <%= f.text_field :vendor_vat_number %>
+      <a href="http://ec.europa.eu/taxation_customs/vies/">Controleer</a>
     </div>
   </div>
   
